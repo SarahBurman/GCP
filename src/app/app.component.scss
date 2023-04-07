@@ -1,0 +1,27 @@
+body {
+    margin: 0 !important;
+}
+
+.import-csv{
+    display: flex;
+    justify-content: center;
+    
+    .import-text{
+        margin-right: 1rem;
+    }
+}
+
+.filter-input{
+    display: flex;
+    flex-flow: row-reverse;
+}
+
+.table-responsive{
+    display: flex;
+    justify-content: center;
+}
+
+.csv-row{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}

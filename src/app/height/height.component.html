@@ -1,0 +1,10 @@
+<div class="height">
+    <div>{{ height | validNumber | unitConverter:selectedUnit}}</div>
+    <div *ngIf="valid(height)">
+        <select [(ngModel)] = "selectedUnit">
+            <option selected="selected" value="meter">meter</option>
+            <option  value="feet">feet</option>
+            <option  value="yard">yard</option>
+        </select>
+    </div>
+</div>
