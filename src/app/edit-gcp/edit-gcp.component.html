@@ -1,11 +1,11 @@
 <h1 mat-dialog-title>edit GCP</h1>
 <div mat-dialog-content>
-    <div>Name: {{gcpPoint.name}}</div>
-    <div>Northing: <input matInput [(ngModel)]="gcpPoint.northing"></div>
-    <div>Easting: <input matInput [(ngModel)]="gcpPoint.easting"></div>
-    <div>Height: <input matInput [(ngModel)]="gcpPoint.height"></div>
+    <div>Name: {{gcpData.name}}</div>
+    <div>Northing: <input matInput [(ngModel)]="gcpData.northing"></div>
+    <div>Easting: <input matInput [(ngModel)]="gcpData.easting"></div>
+    <div>Height: <input matInput [(ngModel)]="gcpData.height"></div>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions  [align]="'center'">
   <button  (click)="onNoClick()">No Thanks</button>
-  <button   [mat-dialog-close]="gcpPoint" cdkFocusInitial>Ok</button>
+  <button   [mat-dialog-close]="gcpData" cdkFocusInitial>Ok</button>
 </div>

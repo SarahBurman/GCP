@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AppComponent } from './app.component';
+
 import { FilterByNamePipe } from './pipes/filterByName.pipe';
 import { ValidNamePipe } from './pipes/validName.pipe';
 import { ValidNumberPipe } from './pipes/validNumber.pipe';

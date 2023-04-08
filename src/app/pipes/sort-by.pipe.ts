@@ -9,13 +9,7 @@ import { ValidNumberPipe } from './validNumber.pipe';
 export class SortByPipe implements PipeTransform {
   constructor(public validNumberPipe: ValidNumberPipe, public validNamePipr: ValidNamePipe) {}
   transform(gcps: GCP[],  column:string ='', asc:boolean): GCP[] {
-    const validGCPs = gcps.map(gcp =>{ return {
-      name:this.validNamePipr.transform(gcp.name),
-      easting: this.validNumberPipe.transform(gcp.easting),
-      northing: this.validNumberPipe.transform(gcp.northing),
-      height: this.validNumberPipe.transform(gcp.height)
-    } as GCP});
-    const array = this.sortInvalid(validGCPs, column);
+    const array = this.sortInvalid(gcps, column);
     const invalidIndex = array.findIndex(gcp => this.invalidGCP(gcp, column));
     const validArray = array.slice(0, invalidIndex != -1? invalidIndex : array.length);
     let invalidArray = [] as GCP[];
@@ -40,16 +34,23 @@ export class SortByPipe implements PipeTransform {
   }
 
   private sortInvalid(array:GCP[], column:string){
-    let lastInvalid = array.length + 2;
-    for(let i=0;i<array.length; i++){
-      const value = array.findIndex(gcp => this.invalidGCP(gcp, column));
+    const validGCPs = array.map(gcp =>{ return {
+      name:this.validNamePipr.transform(gcp.name),
+      easting: this.validNumberPipe.transform(gcp.easting),
+      northing: this.validNumberPipe.transform(gcp.northing),
+      height: this.validNumberPipe.transform(gcp.height)
+    } as GCP});
+
+    let lastInvalid = validGCPs.length;
+    for(let i=0;i<validGCPs.length; i++){
+      const value = validGCPs.findIndex(gcp => this.invalidGCP(gcp, column));
       if(value > -1 && lastInvalid!= value){
-        const gcp = array.splice(value,1);
-        array.push(...gcp);
-        lastInvalid++;
+        const gcp = validGCPs.splice(value,1);
+        validGCPs.push(...gcp);
+        lastInvalid--;
       }
     }
-    return array;
+    return validGCPs;
     
   }
 

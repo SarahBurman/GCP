@@ -1,3 +1,5 @@
+$color-form-highlight: #EEEEEE;
+
 body {
     margin: 0 !important;
 }
@@ -5,6 +7,7 @@ body {
 .import-csv{
     display: flex;
     justify-content: center;
+    font-family: sans-serif;
     
     .import-text{
         margin-right: 1rem;
@@ -16,12 +19,55 @@ body {
     flex-flow: row-reverse;
 }
 
-.table-responsive{
-    display: flex;
-    justify-content: center;
+.table {
+    margin: 1em 1em 0em 1em;
+    width:100%;
+	border:1px solid $color-form-highlight;
+    table-layout: fixed;
+
+    .thead-light {
+        color: white;
+        background: #000;
+    }
 }
 
-.csv-row{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+.table-container thead th {
+    position: sticky; /* make the table heads sticky */
+    top: 0px; /* table head will be placed from the top of the table and sticks to it */
+  }
+
+.table-container{
+    display: flex;
+    justify-content: center;
+    font-family: sans-serif;
+   
+	margin-right:auto;
+	margin-left:auto;
+	align-items:center;
+
+    overflow-y: auto; 
+
+    th, td {
+        padding: 1em 1.2em;
+    }
+
+    tbody {
+        overflow-y:auto;
+        max-height:500px;
+    }
+
+    tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+
+    .table-row:hover {
+        font-weight: bold;
+        color: white;
+        background-color: #009879 !important;
+    }
 }
+
+.table-container tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+    

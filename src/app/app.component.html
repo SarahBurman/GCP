@@ -1,12 +1,11 @@
 
 <div>
     <div class="import-csv">
-        <div class="import-text">import csv file </div>
+        <div class="import-text">CSV file importer</div>
         <input
         #fileUploadSimple
         [accept]="'.csv'"
         type="file"
-        class="file-input"
         (change)="importDataFromCSV($event)"
         hidden="true"
         />
@@ -16,26 +15,27 @@
     <div *ngIf="importedData.length > 0" class="filter-input">
         <input type="search" class="form-control"  [(ngModel)]="filter" placeholder="Filter by name">
     </div>
-    <div class="table-responsive" *ngIf="importedData.length > 0">
-        <table class="table table-hover" >
+    <div class="table-container" *ngIf="importedData.length > 0">
+        <table class="table">
             <thead class="thead-light">
                 <tr>
-                <th (click)="sort('name')">Name</th>
-                <th (click)="sort('northing')">Northing</th>
-                <th (click)="sort('easting')">Easting</th>
-                <th (click)="sort('height')">Height</th>
+                    <th class = "header-item" (click)="sort('name')">Name</th>
+                    <th class = "header-item" (click)="sort('northing')">Northing</th>
+                    <th class = "header-item" (click)="sort('easting')">Easting</th>
+                    <th class = "header-item" (click)="sort('height')">Height</th>
+                    <th class = "header-item">Edit/Delete</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let gcp of importedData | filterByName:filter | sortBy:sortColumn:reverse; let i = index ">
-                <td>
-                    {{ gcp.name | validName }}
-                </td>
-                <td>{{ gcp.northing | validNumber }}</td>
-                <td>{{ gcp.easting | validNumber }}</td>
-                <td><gcp-height height="{{gcp.height}}"></gcp-height></td>
-                <td><button (click)="deleteRow(gcp)">delete</button></td>
-                <td><button mat-raised-button (click)="openDialog(gcp,i )">Edit</button></td>
+                <tr class = "table-row" *ngFor="let gcp of importedData | filterByName:filter | sortBy:sortColumn:reverse; let i = index ">
+                    <td class = "row-data">
+                        {{ gcp.name | validName }}
+                    </td>
+                    <td class = "row-data">{{ gcp.northing | validNumber }}</td>
+                    <td class = "row-data">{{ gcp.easting | validNumber }}</td>
+                    <td class = "row-data"><gcp-height height="{{gcp.height}}"></gcp-height></td>
+                    <td class = "row-data"><button (click)="deleteRow(gcp)">delete</button>
+                    <button (click)="openDialog(gcp)">Edit</button></td>
                 </tr>
             </tbody>
         </table>

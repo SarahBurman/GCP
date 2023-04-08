@@ -23,24 +23,24 @@ export class AppComponent {
     this.importedData = this.mergeData(this.importedData,this._csvService.importDataFromCSV(fileContent));
   }
 
-  openDialog(gcp:GCP, index: number): void {
+  openDialog(gcp:GCP): void {
     const dialogRef = this.dialog.open(EditGCPComponent, {
       width: '250px',
-      data: gcp
+      data: gcp,
     });
 
+
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
-        this.importedData.splice(index, 1, result);
-      }
-      
+      if(result as GCP){
+        this.importedData = this.importedData.map(gcp =>{ if(gcp.name === result.name){ return result} else return gcp;})
+      }    
     });
   }
 
   deleteRow(deleteGcp:GCP){
     const index = this.importedData.findIndex(gcp=> gcp.name=== deleteGcp.name);
-    if(index >= 0 ){
-      this.importedData.splice(index,1);
+    if(index > -1 ){
+      this.importedData = this.importedData.filter(gcp=> gcp.name !== deleteGcp.name);
     }
   }
 
